@@ -3,10 +3,10 @@ PATH=/opt/someApp/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/b
 export LD_LIBRARY_PATH=/usr/local/lib/
 
 if [ -z "$1" ]; then
-    WIDTH=$(cat ~/Video/vidformat.param | xargs | cut -f1 -d" ")
-    HEIGHT=$(cat ~/Video/vidformat.param | xargs | cut -f2 -d" ")
-    FRAMERATE=$(cat ~/Video/vidformat.param | xargs | cut -f3 -d" ")
-    DEVICE=$(cat ~/Video/vidformat.param | xargs | cut -f4 -d" ")
+    WIDTH=$(cat ~/TecXotic_CameraStream/vidformat.param | xargs | cut -f1 -d" ")
+    HEIGHT=$(cat ~/TecXotic_CameraStream/vidformat.param | xargs | cut -f2 -d" ")
+    FRAMERATE=$(cat ~/TecXotic_CameraStream/vidformat.param | xargs | cut -f3 -d" ")
+    DEVICE=$(cat ~/TecXotic_CameraStream/vidformat.param | xargs | cut -f4 -d" ")
 else
     WIDTH=$1
     HEIGHT=$2
@@ -57,6 +57,6 @@ else
     echo "starting device $DEVICE with width $WIDTH height $HEIGHT framerate $FRAMERATE options $gstOptions1"
     bash -c "export LD_LIBRARY_PATH=/usr/local/lib/ && gst-launch-1.0 -v v4l2src device=$DEVICE do-timestamp=true ! video/x-h264, width=$WIDTH, height=$HEIGHT, framerate=$FRAMERATE/1 $gstOptions1"
     # if we make it this far, it means the gst pipeline failed, so load the backup settings
-    cp ~/Video/vidformat.param.bak ~/Video/vidformat.param && rm ~/Video/vidformat.param.bak
+    cp ~/TecXotic_CameraStream/vidformat.param.bak ~/TecXotic_CameraStream/vidformat.param && rm ~/TecXotic_CameraStream/vidformat.param.bak
 fi
 
